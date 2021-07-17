@@ -84,6 +84,10 @@ var nextQuestion = function() {
 
 	if (currentQuestion < questions.length) {
 		questionReader();
+	} else {
+		localStorage.setItem('mostRecentScore', score)
+
+		return window.location.assign('end.html')
 	}
 }
 
@@ -114,12 +118,5 @@ var main = function() {
 
 	choices.forEach(function(choice) {choice.addEventListener("click", clickChoice)})
 }
-
-// let currentQuestion = {}
-// let acceptingAnswers = true
-// let score = 0
-// let questionCounter = 0
-// let availableQuestions = []
-// let timer = 60
 
 main();
