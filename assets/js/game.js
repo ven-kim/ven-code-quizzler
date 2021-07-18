@@ -6,6 +6,7 @@ const timerElement = document.querySelector('#timer');
 var currentQuestion = 0;
 var score = 0;
 
+// list of questions
 var questions = [
 	{
 		id: 1,
@@ -64,6 +65,8 @@ var questions = [
 	}
 ];
 
+// timer function that counts down from 60
+// will add function to send directly to end page when I have the time
 var timer = function() {
 	setInterval(function() {
 		if (timerElement.innerText !== "0")
@@ -71,6 +74,7 @@ var timer = function() {
 	}, 1000);
 }
 
+// displays the question 
 var questionReader = function() {
 	question.innerText = questions[currentQuestion].question;
 
@@ -79,9 +83,11 @@ var questionReader = function() {
 	}
 }
 
+// allows questions to move to the next
 var nextQuestion = function() {
 	currentQuestion = currentQuestion + 1;
 
+	// when the question reaches the end, saves the score and sends you to the end page
 	if (currentQuestion < questions.length) {
 		questionReader();
 	} else {
@@ -91,17 +97,17 @@ var nextQuestion = function() {
 	}
 }
 
+// records the score 
 var scoreCounter = function() {
 	scoreText.innerText = score;
 }
 
+// adds the score for the correct answer; deducts time for any other choices
 var clickChoice = function(e) {
 	var choiceAnswer = e.target.dataset.number;
 	if (choiceAnswer == questions[currentQuestion].answer) {
-		console.log('Correct!');
 		score += 100;
 	} else {
-		console.log('Wrong!');
 		timerElement.innerText -= 5;
 	}
 
@@ -110,10 +116,10 @@ var clickChoice = function(e) {
 }
 
 var main = function() {
-	// Timer Interval
+	// timer Interval
 	timer();
 
-	// Question function
+	// question function
 	questionReader();
 
 	choices.forEach(function(choice) {choice.addEventListener("click", clickChoice)})
