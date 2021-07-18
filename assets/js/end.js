@@ -24,11 +24,12 @@ saveHighscore = function(e) {
 
 	// sorts the player and score to be listed on the highscores page
 	highScoresList.sort((a,b), function() {
-			return b.score - a.score
+			return a.score - b.score
 	})
 
 	// highScoresList.splice(5)
 
+	// assign the highscore name and value to be stored as sorted to be pulled in the highscore.js
 	localStorage.setItem('highScores', JSON.stringify(highScores))
 	window.location.assign('highscore.html')
 }
